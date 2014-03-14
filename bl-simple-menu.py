@@ -1,5 +1,7 @@
 import bpy
 
+# Hello
+
 class customMenu(bpy.types.Menu):
     bl_label = "Custom Menu"
     bl_idname = "View3D.custom_menu"
