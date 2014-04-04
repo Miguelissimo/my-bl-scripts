@@ -49,7 +49,6 @@ class ModalOperator(bpy.types.Operator):
         return {'RUNNING_MODAL'}
 
     def invoke(self, context, event):
-        print(' --- INVOKE --- ')
         
         if context.active_object.mode == 'EDIT':
             bm = bmesh.from_edit_mesh(context.active_object.data)
