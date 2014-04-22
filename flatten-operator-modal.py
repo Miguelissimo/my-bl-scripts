@@ -3,10 +3,10 @@ import bmesh
 from mathutils import Vector
 
 
-class ModalOperator(bpy.types.Operator):
-    """Move an object with the mouse, example"""
-    bl_idname = "object.modal_operator"
-    bl_label = "Simple Modal Operator"
+class FlattenOperator(bpy.types.Operator):
+    """ flattens selected vertices on a given axis"""
+    bl_idname = "object.flatten_operator"
+    bl_label = "Flatten Operator"
 
     def reset_vertices(self):
         for v in self.verts:
@@ -68,15 +68,15 @@ class ModalOperator(bpy.types.Operator):
 
 
 def register():
-    bpy.utils.register_class(ModalOperator)
+    bpy.utils.register_class(FlattenOperator)
 
 
 def unregister():
-    bpy.utils.unregister_class(ModalOperator)
+    bpy.utils.unregister_class(FlattenOperator)
 
 
 if __name__ == "__main__":
     register()
 
     # test call
-    bpy.ops.object.modal_operator('INVOKE_DEFAULT')
+    bpy.ops.object.flatten_operator('INVOKE_DEFAULT')
