@@ -34,13 +34,8 @@ class RenamingOperator(bpy.types.Operator):
             print('EXIT')
             return {'FINISHED'}
         
-        print('--- %s' % event.unicode in self.registered_characters)
-        if event.unicode in self.registered_characters:
-            print('Letter detected, %s' % event.unicode)
-            if event.shift:
-                return self.add_char(context, event.type)
-            else:
-                return self.add_char(context, event.type.lower())
+        if event.unicode != '' and event.unicode in self.registered_characters:
+            return self.add_char(context, '%s' % event.unicode)
         
         else:
             return {'PASS_THROUGH'}
@@ -52,8 +47,9 @@ class RenamingOperator(bpy.types.Operator):
         self.has_orig_name = True
         
         self.registered_characters = string.ascii_lowercase
+        self.registered_characters += string.ascii_uppercase
         self.registered_characters += string.digits
-        self.registered_characters += '_'
+        self.registered_characters += '_.'
         
         context.window_manager.modal_handler_add(self)
         return {'RUNNING_MODAL'}

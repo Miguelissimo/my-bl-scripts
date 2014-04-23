@@ -19,7 +19,8 @@ class MyRiggingToolboxPanel(bpy.types.Panel):
         # single bone renaming
         row = layout.row()
         row.prop(context.selected_bones[0], "name")
-        # TODO renaming tool idea
+        row = layout.row()
+        row.operator("object.renaming_operator", text="Bone renaming")
         
         # parent and unparent
         col = layout.column(align=True)
@@ -44,10 +45,7 @@ class MyRiggingToolboxPanel(bpy.types.Panel):
         # TODO
         
         # bone mirroring
-        # TODO
-        
-        
-        
+        # TODO        
 
 
 def register():
