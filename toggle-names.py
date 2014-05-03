@@ -1,3 +1,9 @@
+bl_info = {
+           'name':'ToogleNames',
+           'category':'User',
+           'author':'miguel'
+           }
+
 import bpy
 
 

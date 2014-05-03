@@ -1,4 +1,5 @@
 import bpy
+from mathutils import Color
 
 
 class ColorBoneRedOperator(bpy.types.Operator):
@@ -17,12 +18,12 @@ class ColorBoneRedOperator(bpy.types.Operator):
         # switch pose mode
         bpy.ops.object.mode_set(mode='POSE')
         
-        # set theme color to custom
-        #obj.color_set = 'CUSTOM'
-        context.object.color_set = 'CUSTOM'
+        # check if a bone group already exists
+        orig_actual_bg_name = None
+        if obj.pose.bone_groups.active != None:
         
-        # get actual bone group
-        orig_actual_bg_name = obj.pose.bone_groups.active.name
+            # get actual bone group
+            orig_actual_bg_name = obj.pose.bone_groups.active.name
         
         # check if red group already exists
         if not 'red' in obj.pose.bone_groups:
@@ -37,12 +38,15 @@ class ColorBoneRedOperator(bpy.types.Operator):
             grp.name = 'red'
             
             # set color of group
-            grp.normal = Color((1.0, 0.0, 0.0))
-            grp.select = Color((0.0, 0.0, 0.0))
-            grp.active = Color((0.5, 0.5, 0.5))
+            grp.colors.normal = Color((1.0, 0.0, 0.0))
+            grp.colors.select = Color((0.0, 0.0, 0.0))
+            grp.colors.active = Color((0.5, 0.5, 0.5))
         
-        # get group
-        grp = obj.pose.bone_groups.active
+        # grap red group
+        grp = obj.pose.bone_groups['red']
+        
+        # set color to CUSTOM
+        grp.color_set = 'CUSTOM'
         
         # assign bones to group
         bpy.ops.pose.group_assign(type=2)

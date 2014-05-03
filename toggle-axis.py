@@ -1,3 +1,9 @@
+bl_info = {
+           'name':'ToogleAxis',
+           'category':'User',
+           'author':'miguel'
+           }
+
 import bpy
 
 

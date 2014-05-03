@@ -1,3 +1,9 @@
+bl_info = {
+           'name':'RenamingOperator',
+           'category':'User',
+           'author':'miguel'
+           }
+
 import bpy
 import string
 import time
@@ -28,11 +34,19 @@ class RenamingOperator(bpy.types.Operator):
     
     def clear_bone_name(self):
         bone_name = ''
+    
+    def remove_last_char(self):
+        if self.current_bone != None:
+            self.current_bone.name = self.current_bone.name[:-1]
         
     def modal(self, context, event):        
         if event.type in {'RET', 'NUMPAD_ENTER'}:
             print('EXIT')
             return {'FINISHED'}
+        
+        if event.type == 'BACK_SPACE':
+            self.remove_last_char()
+            return {'RUNNING_MODAL'}
         
         if event.unicode != '' and event.unicode in self.registered_characters:
             return self.add_char(context, '%s' % event.unicode)

@@ -1,3 +1,9 @@
+bl_info = {
+           'name':'MyRiggingToolbox',
+           'category':'User',
+           'author':'miguel'
+           }
+
 import bpy
 
 
@@ -11,26 +17,34 @@ class MyRiggingToolboxPanel(bpy.types.Panel):
         layout = self.layout
         obj = context.object
         
+        # save incremental
+        row = layout.row()
+        row.operator("object.save_incremental", text="Save++")
+        
         # join and separate
         col = layout.column(align=True)
+        col.operator("armature.duplicate", text="Duplicate")
         col.operator("armature.separate", text="Separate")
         col.operator("object.join", text="Join")
-        
-        # single bone renaming
-        row = layout.row()
-        row.prop(context.selected_bones[0], "name")
-        row = layout.row()
-        row.operator("object.renaming_operator", text="Bone renaming")
+        col.operator("armature.align", text="Align")
         
         # parent and unparent
         col = layout.column(align=True)
         col.operator("armature.parent_clear", text="Unparent")
         col.operator("armature.parent_set", text="Parent")
         
+        # single bone renaming
+        row = layout.row()
+        if context.selected_bones != None:
+            row.prop(context.selected_bones[0], "name")
+            row = layout.row()
+        row.operator("object.renaming_operator", text="Bone renaming")
+        
         # toogle names and axis
         col = layout.column(align=True)
         col.operator("object.toggle_bone_names_operator", text="Display names")
         col.operator("object.toggle_bone_axis_operator", text="Display axis")
+        # TODO toggle color
         
         # clear location, rotation, scale
         # TODO
