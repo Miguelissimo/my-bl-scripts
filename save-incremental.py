@@ -1,3 +1,9 @@
+bl_info = {
+           'name':'SaveIncOperator',
+           'category':'User',
+           'author':'miguel'
+           }
+
 import bpy
 import string
 

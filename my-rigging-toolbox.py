@@ -46,12 +46,12 @@ class MyRiggingToolboxPanel(bpy.types.Panel):
         col.operator("object.toggle_bone_axis_operator", text="Display axis")
         # TODO toggle color
         
-        # clear location, rotation, scale
-        # TODO
+        # parent under null but keep location, rotation, scale
+        row.operator("object.make_empty_parent_operator", text="Parent under Empty")
         
         # lock location, rotation, scale
         # TODO
-        
+
         # color bones
         # TODO
         
