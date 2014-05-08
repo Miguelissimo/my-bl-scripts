@@ -17,9 +17,11 @@ class SaveIncOperator(bpy.types.Operator):
 
     def execute(self, context):
         
+        # get current blender file name
         blend_name = bpy.path.basename(bpy.data.filepath)
         print('blend_name: ', blend_name)
         
+        # remove file extension
         name = blend_name[0:(len(blend_name) -6)]
         print('name: ' + name)
         
@@ -40,18 +42,30 @@ class SaveIncOperator(bpy.types.Operator):
             new_file_name = name + '001.blend'
             print('new_file_name: ', new_file_name)
         else:
+            # extract number from file name
             file_number = ''.join(name[-digit_counter:])
             print('file_number: ', file_number)
             
+            # convert number to int
             number = int(file_number)
             print('number: ', number)
             
+            # the increment step
             number += 1
+            
+            # setup new file name
             new_file_name = name[0:(len(name)-digit_counter)] + ('%03.d' % number) + '.blend'
             print('new_file_name: ', new_file_name)
         
-        final_path = '/home/miguel/' + new_file_name
-        print('final_path: ', final_path)
+        # extract blender file name from path
+        path = bpy.data.filepath[:-len(blend_name)]
+        print('Path to file %s' % path)
+        
+        if len(path) <= 0:
+            final_path = '/home/miguel/' + new_file_name
+            print('final_path: ', final_path)
+        else:
+            final_path = path + new_file_name
         bpy.ops.wm.save_as_mainfile(filepath=final_path, check_existing=False)
         
         return {'FINISHED'}

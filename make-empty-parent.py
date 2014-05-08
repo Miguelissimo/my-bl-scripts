@@ -51,7 +51,6 @@ class MakeEmptyParentOperator(bpy.types.Operator):
         empty.rotation_euler = orig_rot
         empty.scale = orig_sca
         
-        print('location %s ' % str(orig_loc))
         return {'FINISHED'}
 
 

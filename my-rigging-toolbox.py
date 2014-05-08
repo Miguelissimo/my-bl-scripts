@@ -47,6 +47,7 @@ class MyRiggingToolboxPanel(bpy.types.Panel):
         # TODO toggle color
         
         # parent under null but keep location, rotation, scale
+        row = layout.row()
         row.operator("object.make_empty_parent_operator", text="Parent under Empty")
         
         # lock location, rotation, scale
