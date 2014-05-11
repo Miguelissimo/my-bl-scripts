@@ -28,6 +28,7 @@ class MakeEmptyParentOperator(bpy.types.Operator):
         orig_loc = obj.location.copy()
         orig_rot = obj.rotation_euler.copy()
         orig_sca = obj.scale.copy()
+        orig_name = obj.name
         
         # set object to (0,0,0)
         obj.location = Vector((0,0,0))
@@ -50,6 +51,10 @@ class MakeEmptyParentOperator(bpy.types.Operator):
         empty.location = orig_loc
         empty.rotation_euler = orig_rot
         empty.scale = orig_sca
+        
+        # select previously selected object
+        bpy.ops.object.select_all(action='DESELECT')
+        bpy.ops.object.select_pattern(pattern=orig_name)
         
         return {'FINISHED'}
 
