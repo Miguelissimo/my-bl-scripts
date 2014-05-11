@@ -47,14 +47,17 @@ class MyRiggingToolboxPanel(bpy.types.Panel):
         # TODO toggle color
         
         # parent under null but keep location, rotation, scale
-        row = layout.row()
-        row.operator("object.make_empty_parent_operator", text="Parent under Empty")
+        col = layout.column(align=True)
+        col.operator("object.make_empty_parent_operator", text="Parent under Empty")
+        col.operator("wm.call_menu", text="Snap bone to bone").name = 'View3D.MoveFirstSecondMenu'
         
         # lock location, rotation, scale
         # TODO
 
         # color bones
-        # TODO
+        col = layout.column(align=True)
+        col.operator("object.color_bone_red_operator", text="Color red").color = 'red'
+        col.operator("object.color_bone_operator", text="Color blue").color = 'blue'
         
         # custom controls for manipulation
         # TODO
